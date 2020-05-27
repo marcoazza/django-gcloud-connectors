@@ -78,8 +78,9 @@ def _merged_indexes():
 
     result = _app_special_indexes.copy()
     for model, indexes in (_project_special_indexes or {}).items():
-        for field_name, values in indexes.items():
-            result.setdefault(model, {}).setdefault(field_name, []).extend(values)
+        for index in indexes:
+            for field_name, values in index.items():
+                result.setdefault(model, {}).setdefault(field_name, []).extend(values)
     return result
 
 
